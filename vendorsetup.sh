@@ -1,0 +1,3 @@
+add_lunch_combo odroidn1-eng
+add_lunch_combo odroidn1-userdebug
+add_lunch_combo odroidn1-user
