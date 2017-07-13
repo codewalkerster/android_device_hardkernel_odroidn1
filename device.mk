@@ -30,27 +30,12 @@ ifeq ($(HOST_OS),linux)
 TARGET_USERIMAGES_USE_F2FS := true
 endif
 
-#copy init.rc for tablet or box product
-#ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), box)
-#PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rk3399_box/init.rc:root/init.rc
-#else
-#ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), tablet)
-#PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rk3399_32/init.rc:root/init.rc
-#endif
-#endif
-
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.${TARGET_BOARD_PLATFORM}.rc:root/init.${TARGET_BOARD_PLATFORM}.rc \
     $(LOCAL_PATH)/init.${TARGET_BOARD_PLATFORM_PRODUCT}.rc:root/init.${TARGET_BOARD_PLATFORM_PRODUCT}.rc \
     $(LOCAL_PATH)/debug/init.debug.rc:root/init.debug.rc \
     $(LOCAL_PATH)/init.odroidn1.usb.rc:root/init.odroidn1.usb.rc \
     $(LOCAL_PATH)/wake_lock_filter.xml:system/etc/wake_lock_filter.xml
-
-#fireware for dp
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/dptx.bin:root/lib/firmware/rockchip/dptx.bin
 
 #debug io bin
 PRODUCT_COPY_FILES += \

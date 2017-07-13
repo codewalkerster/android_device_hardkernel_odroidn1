@@ -60,7 +60,7 @@ endif
 # Sensors
 BOARD_SENSOR_ST := false
 BOARD_SENSOR_MPU := false
-BOARD_SENSOR_MPU_VR := true
+BOARD_SENSOR_MPU_VR := false
 #BOARD_USES_GENERIC_INVENSENSE := false
 
 # GPU MaliT860 support opengl aep
