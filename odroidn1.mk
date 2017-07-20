@@ -40,6 +40,9 @@ PRODUCT_BRAND := ODROID
 PRODUCT_MODEL := ODROIDN1
 PRODUCT_MANUFACTURER := HardKernel Co., Ltd.
 
+# USB GPS
+PRODUCT_PACKAGES += \
+    gps.$(PRODUCT_DEVICE)
 
 # Get the long list of APNs
 PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/apns-full-conf.xml:system/etc/apns-conf.xml
