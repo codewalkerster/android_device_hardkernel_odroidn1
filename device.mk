@@ -202,3 +202,6 @@ endif
 
 PRODUCT_COPY_FILES += \
     device/hardkernel/odroidn1/public.libraries.txt:system/vendor/etc/public.libraries.txt
+
+PRODUCT_COPY_FILES += \
+    device/hardkernel/odroidn1/files/odroid-usbgps.xml:root/odroid-usbgps.xml
