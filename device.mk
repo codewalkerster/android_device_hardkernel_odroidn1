@@ -205,3 +205,11 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     device/hardkernel/odroidn1/files/odroid-usbgps.xml:root/odroid-usbgps.xml
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/wifi/rt2870.bin:root/lib/firmware/rt2870.bin \
+    $(LOCAL_PATH)/wifi/rtl8192cufw_TMSC.bin:root/lib/firmware/rtlwifi/rtl8192cufw_TMSC.bin \
+    $(LOCAL_PATH)/wifi/wifi_id_list.txt:system/etc/wifi_id_list.txt \
+    $(LOCAL_PATH)/wifi/8192cu:system/etc/modprobe.d/8192cu \
+    $(LOCAL_PATH)/wifi/8812au:system/etc/modprobe.d/8812au \
+    $(LOCAL_PATH)/wifi/rt2800usb:system/etc/modprobe.d/rt2800usb
