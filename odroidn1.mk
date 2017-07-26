@@ -25,6 +25,7 @@ include device/hardkernel/odroidn1/BoardConfig.mk
 # Inherit from those products. Most specific first.
 $(call inherit-product, device/hardkernel/odroidn1/product.mk)
 $(call inherit-product, device/hardkernel/common/device.mk)
+$(call inherit-product, device/hardkernel/proprietary/proprietary.mk)
 
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_SHIPPING_API_LEVEL :=25
