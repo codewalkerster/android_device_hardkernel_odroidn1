@@ -213,3 +213,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/8192cu:system/etc/modprobe.d/8192cu \
     $(LOCAL_PATH)/wifi/8812au:system/etc/modprobe.d/8812au \
     $(LOCAL_PATH)/wifi/rt2800usb:system/etc/modprobe.d/rt2800usb
+
+PRODUCT_PACKAGES += \
+    busybox \
+    utility_busybox
