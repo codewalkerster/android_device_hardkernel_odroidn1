@@ -216,4 +216,5 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     busybox \
-    utility_busybox
+    utility_busybox \
+    su
