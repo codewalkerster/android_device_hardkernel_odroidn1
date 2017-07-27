@@ -100,6 +100,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     SoundRecorder
 
+# Prebuilt app
+PRODUCT_PACKAGES += \
+    androidterm
+
 # USB GPS
 PRODUCT_PACKAGES += \
     gps.$(PRODUCT_DEVICE)
