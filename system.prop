@@ -9,6 +9,10 @@ ro.ril.ecclist=112,911
 persist.tegra.nvmmlite = 1
 ro.audio.monitorOrientation=true
 
+#NFC
+debug.nfc.fw_download=false
+debug.nfc.se=false
+
 #add Rockchip properties here
 ro.rk.screenshot_enable=true
 ro.rk.def_brightness=200

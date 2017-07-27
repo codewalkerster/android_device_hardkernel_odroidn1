@@ -21,19 +21,24 @@
 # details, it only fundamentally contains two inherit-product
 # lines, aosp and odroidn1, hence its name.
 
-include device/hardkernel/odroidn1/BoardConfig.mk
-# Inherit from those products. Most specific first.
-$(call inherit-product, device/hardkernel/odroidn1/product.mk)
-$(call inherit-product, device/hardkernel/common/device.mk)
-$(call inherit-product, device/hardkernel/proprietary/proprietary.mk)
 
-PRODUCT_CHARACTERISTICS := tablet
-PRODUCT_SHIPPING_API_LEVEL :=25
+#
+# Copyright 2014 The Android Open-Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
-# Live Wallpapers
-PRODUCT_PACKAGES += \
-        rild \
-        Launcher3
+$(call inherit-product, $(LOCAL_PATH)/rk3399_64.mk)
 
 PRODUCT_NAME := odroidn1
 PRODUCT_DEVICE := odroidn1
@@ -41,10 +46,60 @@ PRODUCT_BRAND := ODROID
 PRODUCT_MODEL := ODROIDN1
 PRODUCT_MANUFACTURER := HardKernel Co., Ltd.
 
+
+PRODUCT_AAPT_CONFIG := normal large mdpi tvdpi hdpi xhdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
+
+PRODUCT_SYSTEM_VERITY := true
+
+# debug-logs
+ifneq ($(TARGET_BUILD_VARIANT),user)
+MIXIN_DEBUG_LOGS := true
+endif
+
+# google apps
+BUILD_WITH_GOOGLE_MARKET := false
+BUILD_WITH_GOOGLE_MARKET_ALL := false
+BUILD_WITH_GOOGLE_FRP := false
+
+#for data encrypt options
+BUILD_WITH_FORCEENCRYPT := true
+
+#for GMS Certification
+BUILD_WITH_GMS_CER := false
+
+#for drm widevine
+BUILD_WITH_WIDEVINE := true
+
+#for cts requirement
+ifeq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.adb.secure=1 \
+    persist.sys.usb.config=mtp
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.adb.secure=0 \
+    persist.sys.usb.config=mtp,adb
+endif
+
+BOOT_SHUTDOWN_ANIMATION_RINGING := false
+
+BOARD_NFC_SUPPORT := false
+
+BOARD_PROXIMITY_SENSOR_SUPPORT := false
+BOARD_PRESSURE_SENSOR_SUPPORT := false
+BOARD_TEMPERATURE_SENSOR_SUPPORT := false
+BOARD_USB_HOST_SUPPORT := true
+PRODUCT_HAS_CAMERA := true
+TARGET_ROCKCHIP_PCBATEST := false
+
+PRODUCT_COPY_FILES += \
+   device/hardkernel/odroidn1/rk3399_64/ddr_config.xml:system/etc/ddr_config.xml \
+   device/hardkernel/odroidn1/rk3399_64/video_status:system/etc/video_status
+
+PRODUCT_PACKAGES += \
+    SoundRecorder
+
 # USB GPS
 PRODUCT_PACKAGES += \
     gps.$(PRODUCT_DEVICE)
-
-# Get the long list of APNs
-PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/apns-full-conf.xml:system/etc/apns-conf.xml
-PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/spn-conf.xml:system/etc/spn-conf.xml

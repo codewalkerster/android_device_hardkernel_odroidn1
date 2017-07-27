@@ -69,6 +69,9 @@ BOARD_OPENGL_AEP := true
 # Copy rk3399 own init.rc file
 # TARGET_PROVIDES_INIT_RC := true
 
+WITH_DEXPREOPT := true
+
+TARGET_BOARD_PLATFORM_PRODUCT := tablet
 
 //MAX-SIZE=2G, for generate out/.../system.img
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1610612736
