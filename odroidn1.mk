@@ -63,7 +63,7 @@ BUILD_WITH_GOOGLE_MARKET_ALL := false
 BUILD_WITH_GOOGLE_FRP := false
 
 #for data encrypt options
-BUILD_WITH_FORCEENCRYPT := true
+#BUILD_WITH_FORCEENCRYPT := true
 
 #for GMS Certification
 BUILD_WITH_GMS_CER := false
