@@ -28,5 +28,8 @@ source build/envsetup.sh
 lunch odroidn1-eng
 make -j8
 
+echo 'make images'
+./mkimage.sh
+
 echo 'cp sd_fusing.sh'
 cp u-boot/sd_fuse/* rockdev/Image-odroidn1/
