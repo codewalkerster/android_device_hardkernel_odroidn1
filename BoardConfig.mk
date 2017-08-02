@@ -17,7 +17,8 @@
 # Use the non-open-source parts, if they're present
 -include device/hardkernel/common/BoardConfig.mk
 
-TARGET_PREBUILT_KERNEL := kernel/arch/arm64/boot/Image
+TARGET_NO_KERNEL := false
+TARGET_NO_BOOTLOADER := false
 
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
