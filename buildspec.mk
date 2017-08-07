@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 ######################################################################
 # This is a do-nothing template file.  To use it, copy it to a file
 # named "buildspec.mk" in the root directory, and uncomment or change
@@ -27,7 +26,7 @@ TARGET_BOARD_PLATFORM_GPU ?= mali-t860
 # Choose a product to build for.  Look in the products directory for ones
 # that work.
 ifndef TARGET_PRODUCT
-TARGET_PRODUCT:=odroidn1
+TARGET_PRODUCT:=rk3399
 endif
 
 # Choose a variant to build.  If you don't pick one, the default is eng.

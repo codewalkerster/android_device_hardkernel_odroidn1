@@ -30,6 +30,12 @@ ifeq ($(HOST_OS),linux)
 TARGET_USERIMAGES_USE_F2FS := true
 endif
 
+#ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), tablet)
+#PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rk3399_32/init.rc:root/init.rc
+#endif
+#endif
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.${TARGET_BOARD_PLATFORM}.rc:root/init.${TARGET_BOARD_PLATFORM}.rc \
     $(LOCAL_PATH)/init.${TARGET_BOARD_PLATFORM_PRODUCT}.rc:root/init.${TARGET_BOARD_PLATFORM_PRODUCT}.rc \

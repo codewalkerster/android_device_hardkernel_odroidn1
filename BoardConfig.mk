@@ -15,7 +15,6 @@
 #
 
 # Use the non-open-source parts, if they're present
--include vendor/rockchip/rk3399/BoardConfigVendor.mk
 -include device/hardkernel/common/BoardConfig.mk
 
 TARGET_PREBUILT_KERNEL := kernel/arch/arm64/boot/Image
