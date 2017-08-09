@@ -3,16 +3,14 @@
 INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
 
 KERNEL_ARCH := arm64
-ARCHV=aarch64
 KERNEL_DEFCONFIG := odroidn1_defconfig
+PREFIX_CROSS_COMPILE := aarch64-linux-android-
 
 KERNEL_ROOTDIR := kernel
 KERNEL_CONFIG := $(KERNEL_ROOTDIR)/.config
 KERNEL_IMAGE := $(KERNEL_ROOTDIR)/arch/$(KERNEL_ARCH)/boot/Image
 KERNEL_MODULES_INSTALL := system
 KERNEL_MODULES_OUT := $(TARGET_OUT)/lib/modules
-
-PREFIX_CROSS_COMPILE=aarch64-linux-android-
 
 $(KERNEL_MODULES_OUT):
 	mkdir -p $(KERNEL_MODULES_OUT)
@@ -29,6 +27,21 @@ $(KERNEL_IMAGE): $(KERNEL_CONFIG) $(KERNEL_MODULES_OUT)
 	find $(KERNEL_ROOTDIR)/../hardware/wifi -name *.ko | xargs -i cp {} $(PRODUCT_OUT)/system/lib/modules
 	find $(KERNEL_ROOTDIR) -name *.ko | xargs -i cp {} $(PRODUCT_OUT)/system/lib/modules
 
-$(INSTALLED_KERNEL_TARGET): $(KERNEL_IMAGE) | $(ACP)
+UBOOT_ARCHV := aarch64
+UBOOT_DEFCONFIG := odroidn1_defconfig
+UBOOT_ROOTDIR := u-boot
+UBOOT_IMAGE := $(UBOOT_ROOTDIR)/u-boot.bin
+UBOOT_CONFIG := $(UBOOT_ROOTDIR)/.config
+
+$(UBOOT_CONFIG):
+	$(MAKE) -C $(UBOOT_ROOTDIR) ARCHV=$(UBOOT_ARCHV) \
+		CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) $(UBOOT_DEFCONFIG)
+
+$(UBOOT_IMAGE): $(UBOOT_CONFIG)
+	$(MAKE) -C $(UBOOT_ROOTDIR) ARCHV=$(UBOOT_ARCHV) \
+		CROSS_COMPILE=$(PREFIX_CROSS_COMPILE)
+
+$(INSTALLED_KERNEL_TARGET): $(KERNEL_IMAGE) $(UBOOT_IMAGE) | $(ACP)
 	@echo "Kernel installed"
+	@echo "U-boot installed"
 	$(transform-prebuilt-to-target)
