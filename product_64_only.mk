@@ -24,7 +24,4 @@ PRODUCT_COPY_FILES += system/core/rootdir/init.zygote64.rc:root/init.zygote64.rc
 # Use 64b single zygote
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote64
 
-# Disable bluetooth because of continuous driver crashes
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_bluetooth=true
-
 $(call inherit-product, device/rockchip/rk3399/product.mk)
