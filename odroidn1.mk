@@ -46,6 +46,11 @@ PRODUCT_BRAND := ODROID
 PRODUCT_MODEL := ODROIDN1
 PRODUCT_MANUFACTURER := HardKernel Co., Ltd.
 
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_LINUX := true
+
+# Disable bluetooth because of continuous driver crashes
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_bluetooth=false
 
 PRODUCT_AAPT_CONFIG := normal large mdpi tvdpi hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi

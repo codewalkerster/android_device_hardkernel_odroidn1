@@ -18,7 +18,10 @@
 #define _BDROID_BUILDCFG_H
 
 #define BTM_DEF_LOCAL_NAME	"odroidn1"
-#define BTA_DM_COD {0x1A, 0x01, 0x10}
+#define BLUETOOTH_HCI_USE_USB    TRUE
+
+#define HCILP_INCLUDE    FALSE
+#define BTA_AV_SINK_INCLUDED TRUE
 
 #endif
 
