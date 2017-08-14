@@ -43,10 +43,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.odroidn1.usb.rc:root/init.odroidn1.usb.rc \
     $(LOCAL_PATH)/wake_lock_filter.xml:system/etc/wake_lock_filter.xml
 
-#debug io bin
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/io:system/xbin/io
-
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/fstab.odroidn1:root/fstab.odroidn1 \
     $(LOCAL_PATH)/fstab.odroidn1.sdboot:root/fstab.odroidn1.sdboot
