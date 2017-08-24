@@ -47,17 +47,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/io:system/xbin/io
 
-ifeq ($(BUILD_WITH_FORCEENCRYPT),true)
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/fstab.odroidn1.bootmode.forceencrypt.unknown:root/fstab.odroidn1.bootmode.unknown \
-    $(LOCAL_PATH)/fstab.odroidn1.bootmode.forceencrypt.emmc:root/fstab.odroidn1.bootmode.emmc \
-    $(LOCAL_PATH)/fstab.odroidn1.bootmode.forceencrypt.nvme:root/fstab.odroidn1.bootmode.nvme
-else
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/fstab.odroidn1.bootmode.unknown:root/fstab.odroidn1.bootmode.unknown \
-    $(LOCAL_PATH)/fstab.odroidn1.bootmode.emmc:root/fstab.odroidn1.bootmode.emmc \
-    $(LOCAL_PATH)/fstab.odroidn1.bootmode.nvme:root/fstab.odroidn1.bootmode.nvme
-endif
+    $(LOCAL_PATH)/fstab.odroidn1:root/fstab.odroidn1 \
+    $(LOCAL_PATH)/fstab.odroidn1.sdboot:root/fstab.odroidn1.sdboot
+
 # debug-logs
 ifeq ($(MIXIN_DEBUG_LOGS),true)
 ADDITIONAL_DEFAULT_PROPERTIES += ro.service.default_logfs=apklogfs
@@ -224,5 +217,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     busybox \
+	utility_busybox \
     busybox_links \
     su
