@@ -15,3 +15,4 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(LOCAL_PATH)/Kernel.mk
+include $(LOCAL_PATH)/selfinstall.mk
