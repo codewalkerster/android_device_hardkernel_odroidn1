@@ -77,30 +77,6 @@ else
 	rkst/mkkrnlimg $OUT/ramdisk.img $IMAGE_PATH/boot.img >/dev/null
 	echo "done."
 fi
-if [ $TARGET == $BOOT_OTA ]
-then
-	echo -n "create recovery.img with kernel and resource... "
-	[ -d $OUT/recovery/root ] && \
-	mkbootfs $OUT/recovery/root | minigzip > $OUT/ramdisk-recovery.img && \
-        truncate -s "%4" $OUT/ramdisk-recovery.img && \
-        mkbootimg --kernel $OUT/kernel --ramdisk $OUT/ramdisk-recovery.img --second kernel/resource.img --os_version $PLATFORM_VERSION --os_patch_level $PLATFORM_SECURITY_PATCH --cmdline buildvariant=$TARGET_BUILD_VARIANT --output $OUT/recovery.img && \
-	cp -a $OUT/recovery.img $IMAGE_PATH/
-	echo "done."
-else
-	echo -n "create recovery.img without kernel and resource... "
-	[ -d $OUT/recovery/root ] && \
-	mkbootfs $OUT/recovery/root | minigzip > $OUT/ramdisk-recovery.img && \
-        truncate -s "%4" $OUT/ramdisk-recovery.img && \
-        #mkbootimg --kernel $OUT/kernel --ramdisk $OUT/ramdisk-recovery.img --os_version $PLATFORM_VERSION --os_patch_level $PLATFORM_SECURITY_PATCH --cmdline buildvariant=$TARGET_BUILD_VARIANT --output $OUT/recovery.img && \
-        rkst/mkkrnlimg $OUT/ramdisk-recovery.img $OUT/recovery.img
-	cp -a $OUT/recovery.img $IMAGE_PATH/
-	echo "done."
-fi
-	echo -n "create misc.img.... "
-	cp -a rkst/Image/misc.img $IMAGE_PATH/misc.img
-	cp -a rkst/Image/pcba_small_misc.img $IMAGE_PATH/pcba_small_misc.img
-	cp -a rkst/Image/pcba_whole_misc.img $IMAGE_PATH/pcba_whole_misc.img
-	echo "done."
 
 if [ -d $OUT/system ]
 then
@@ -116,11 +92,7 @@ then
 	elif [ "$FSTYPE" = "ext3" ] || [ "$FSTYPE" = "ext4" ]
 	then
         if [ "$PRODUCT_SYSTEM_VERITY" = "true" ]; then
-                python ./build/tools/releasetools/build_image.py \
-                    $OUT/system $OUT/obj/PACKAGING/systemimage_intermediates/system_image_info.txt \
-                    $OUT/system.img $OUT/system
-                echo -n "translate verified sparse image to raw image... "
-                simg2img $OUT/system.img $IMAGE_PATH/system.img
+                echo -n "ignore"
         else
                 #system_size=`ls -l $OUT/system.img | awk '{print $5;}'`
                 system_size=$BOARD_SYSTEMIMAGE_PARTITION_SIZE
@@ -141,23 +113,6 @@ then
 	fi
 	echo "done."
 fi
-if [ -f $UBOOT_PATH/uboot.img ]
-then
-	echo -n "create uboot.img..."
-	cp -a $UBOOT_PATH/uboot.img $IMAGE_PATH/uboot.img
-	echo "done."
-else
-	echo "$UBOOT_PATH/uboot.img not fount! Please make it from $UBOOT_PATH first!"
-fi
-
-if [ -f $UBOOT_PATH/trust.img ]
-then
-        echo -n "create trust.img..."
-        cp -a $UBOOT_PATH/trust.img $IMAGE_PATH/trust.img
-        echo "done."
-else    
-        echo "$UBOOT_PATH/trust.img not fount! Please make it from $UBOOT_PATH first!"
-fi
 
 if [ -f $UBOOT_PATH/*_loader_*.bin ]
 then
@@ -176,24 +131,6 @@ else
 	else
         echo "$UBOOT_PATH/*MiniLoaderAll_*.bin not fount! Please make it from $UBOOT_PATH first!"
 	fi
-fi
-
-if [ -f $KERNEL_PATH/resource.img ]
-then
-        echo -n "create resource.img..."
-        cp -a $KERNEL_PATH/resource.img $IMAGE_PATH/resource.img
-        echo "done."
-else
-        echo "$KERNEL_PATH/resource.img not fount!"
-fi
-
-if [ -f $KERNEL_PATH/kernel.img ]
-then
-        echo -n "create kernel.img..."
-        cp -a $KERNEL_PATH/kernel.img $IMAGE_PATH/kernel.img
-        echo "done."
-else
-        echo "$KERNEL_PATH/kernel.img not fount!"
 fi
 
 chmod a+r -R $IMAGE_PATH/

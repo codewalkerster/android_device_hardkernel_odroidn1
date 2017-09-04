@@ -17,7 +17,9 @@
 SIGNJAR := out/host/linux-x86/framework/signapk.jar
 
 IMAGES := rockdev/Image-odroidn1
-EBOOT := u-boot/sd_fuse/eboot_android7.img
+KERNEL := kernel
+UBOOT := u-boot/sd_fuse
+EBOOT := $(UBOOT)/eboot_android7.img
 
 SELFINSTALL_DIR := $(PRODUCT_OUT)/selfinstall
 SELFINSTALL_SIGNED_UPDATEPACKAGE := $(SELFINSTALL_DIR)/cache/update.zip
@@ -75,23 +77,23 @@ $(SELFINSTALL_CACHE_IMAGE): $(SELFINSTALL_DIR)/cache.img
 #
 $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).bin: \
 	$(EBOOT) \
-	$(IMAGES)/uboot.img \
-	$(IMAGES)/trust.img \
+	$(UBOOT)/uboot.img \
+	$(UBOOT)/trust.img \
 	$(BOOTLOADER_MESSAGE) \
-	$(IMAGES)/resource.img \
-	$(IMAGES)/kernel.img \
+	$(KERNEL)/resource.img \
+	$(KERNEL)/kernel.img \
 	$(IMAGES)/boot.img \
-	$(IMAGES)/recovery.img \
+	$(PRODUCT_OUT)/recovery.img \
 	$(SELFINSTALL_CACHE_IMAGE)
 	@echo "Creating installable single image file..."
 	dd if=$(EBOOT) of=$@ conv=fsync bs=512 count=16384
-	dd if=$(IMAGES)/uboot.img of=$@ conv=fsync bs=512 seek=16384
-	dd if=$(IMAGES)/trust.img of=$@ conv=fsync bs=512 seek=24576
+	dd if=$(UBOOT)/uboot.img of=$@ conv=fsync bs=512 seek=16384
+	dd if=$(UBOOT)/trust.img of=$@ conv=fsync bs=512 seek=24576
 	dd if=$(BOOTLOADER_MESSAGE) of=$@ conv=fsync bs=512 seek=32768
-	dd if=$(IMAGES)/resource.img of=$@ conv=fsync bs=512 seek=32776
-	dd if=$(IMAGES)/kernel.img of=$@ conv=fsync bs=512 seek=65544
+	dd if=$(KERNEL)/resource.img of=$@ conv=fsync bs=512 seek=32776
+	dd if=$(KERNEL)/kernel.img of=$@ conv=fsync bs=512 seek=65544
 	dd if=$(IMAGES)/boot.img of=$@ conv=fsync bs=512 seek=114696
-	dd if=$(IMAGES)/recovery.img of=$@ conv=fsync bs=512 seek=180232
+	dd if=$(PRODUCT_OUT)/recovery.img of=$@ conv=fsync bs=512 seek=180232
 	dd if=$(SELFINSTALL_CACHE_IMAGE) of=$@ bs=512 seek=247808
 	sync
 	@echo "Done."
