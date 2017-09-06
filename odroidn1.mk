@@ -107,7 +107,8 @@ PRODUCT_PACKAGES += \
 
 # Prebuilt app
 PRODUCT_PACKAGES += \
-    androidterm
+    androidterm \
+    CMFileManager
 
 # USB GPS
 PRODUCT_PACKAGES += \
