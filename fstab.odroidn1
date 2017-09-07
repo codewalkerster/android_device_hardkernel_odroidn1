@@ -6,6 +6,7 @@
 /dev/block/mmcblk1p2 /system            ext4    ro                                              wait
 /dev/block/mmcblk1p4 /data              ext4    noatime,nosuid,nodev wait,check,encryptable=/dev/block/misc
 /dev/block/mmcblk1p3 /cache             ext4    noatime,nosuid,nodev wait,check
+/dev/block/mmcblk1   /misc              raw     offset=32768    defaults
 
 # When booted by eMMC card
 /devices/*.emmc/mmc_host/emmc*          auto    vfat    defaults    voldmanaged=internal:1,noemulatedsd
