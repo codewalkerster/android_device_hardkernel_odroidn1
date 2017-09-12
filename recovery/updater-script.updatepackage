@@ -5,9 +5,9 @@ show_progress(1.0000, 0);
 ui_print("\n\nHardkernel's ODROID-N1 Android Update is started...");
 set_progress(0.1000);
 
-ui_print("   eboot is flashing...");
-package_extract_file("eboot_android7.img", "/tmp/eboot_android7.img");
-run_program("/bin/dd", "if=/tmp/eboot_android7.img", "of=/dev/block/mmcblk1", "count=16384");
+ui_print("   idbloader is flashing...");
+package_extract_file("idbloader.img", "/tmp/idbloader.img");
+run_program("/bin/dd", "if=/tmp/idbloader.img", "of=/dev/block/mmcblk1", "seek=64");
 
 set_progress(0.2000);
 

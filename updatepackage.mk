@@ -10,7 +10,7 @@ $(PRODUCT_OUT)/updatepackage.zip: system recovery
 	rm -rf $@
 	rm -rf $(PKGDIR)
 	mkdir -p $(PKGDIR)/META-INF/com/google/android
-	cp -a $(UBOOT)/eboot_android7.img $(PKGDIR)
+	cp -a $(UBOOT)/idbloader.img $(PKGDIR)
 	cp -a $(UBOOT)/uboot.img $(PKGDIR)
 	cp -a $(UBOOT)/trust.img $(PKGDIR)
 	cp -a $(KERNEL)/resource.img $(PKGDIR)

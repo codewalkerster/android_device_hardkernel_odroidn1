@@ -19,7 +19,7 @@ SIGNJAR := out/host/linux-x86/framework/signapk.jar
 IMAGES := rockdev/Image-odroidn1
 KERNEL := kernel
 UBOOT := u-boot/sd_fuse
-EBOOT := $(UBOOT)/eboot_android7.img
+IDBLOADER := $(UBOOT)/idbloader.img
 
 SELFINSTALL_DIR := $(PRODUCT_OUT)/selfinstall
 SELFINSTALL_SIGNED_UPDATEPACKAGE := $(SELFINSTALL_DIR)/cache/update.zip
@@ -76,7 +76,7 @@ $(SELFINSTALL_CACHE_IMAGE): $(SELFINSTALL_DIR)/cache.img
 # Android Self-Installation
 #
 $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).bin: \
-	$(EBOOT) \
+	$(IDBLOADER) \
 	$(UBOOT)/uboot.img \
 	$(UBOOT)/trust.img \
 	$(BOOTLOADER_MESSAGE) \
@@ -86,7 +86,7 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).bin: \
 	$(PRODUCT_OUT)/recovery.img \
 	$(SELFINSTALL_CACHE_IMAGE)
 	@echo "Creating installable single image file..."
-	dd if=$(EBOOT) of=$@ conv=fsync bs=512 count=16384
+	dd if=$(IDBLOADER) of=$@ conv=fsync bs=512 seek=64
 	dd if=$(UBOOT)/uboot.img of=$@ conv=fsync bs=512 seek=16384
 	dd if=$(UBOOT)/trust.img of=$@ conv=fsync bs=512 seek=24576
 	dd if=$(BOOTLOADER_MESSAGE) of=$@ conv=fsync bs=512 seek=32768
