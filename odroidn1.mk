@@ -108,7 +108,8 @@ PRODUCT_PACKAGES += \
 # Prebuilt app
 PRODUCT_PACKAGES += \
     androidterm \
-    CMFileManager
+    CMFileManager \
+    LightningBrowser
 
 # USB GPS
 PRODUCT_PACKAGES += \
