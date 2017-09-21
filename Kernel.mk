@@ -21,7 +21,7 @@ $(KERNEL_CONFIG):
 
 $(KERNEL_IMAGE): $(KERNEL_CONFIG) $(KERNEL_MODULES_OUT)
 	$(MAKE) -C $(KERNEL_ROOTDIR) ARCH=$(KERNEL_ARCH) \
-		CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) rk3399-odroidn1-rev0.img
+		CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) rk3399-odroidn1-rev0.img modules
 	find $(KERNEL_ROOTDIR)/../hardware/wifi -name *.ko | xargs -i cp {} $(PRODUCT_OUT)/system/lib/modules
 	find $(KERNEL_ROOTDIR) -name *.ko | xargs -i cp {} $(PRODUCT_OUT)/system/lib/modules
 
