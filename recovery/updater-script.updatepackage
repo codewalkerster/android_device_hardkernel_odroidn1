@@ -7,48 +7,48 @@ set_progress(0.1000);
 
 ui_print("   idbloader is flashing...");
 package_extract_file("idbloader.img", "/tmp/idbloader.img");
-run_program("/bin/dd", "if=/tmp/idbloader.img", "of=/dev/block/mmcblk1", "seek=64");
+run_program("/bin/dd", "if=/tmp/idbloader.img", "of=/dev/block/mmcblk0", "seek=64");
 
 set_progress(0.2000);
 
 ui_print("   U-boot is flashing...");
 package_extract_file("uboot.img", "/tmp/uboot.img");
-run_program("/bin/dd", "if=/tmp/uboot.img", "of=/dev/block/mmcblk1", "seek=16384");
+run_program("/bin/dd", "if=/tmp/uboot.img", "of=/dev/block/mmcblk0", "seek=16384");
 
 set_progress(0.3000);
 
 ui_print("   trust is flashing...");
 package_extract_file("trust.img", "/tmp/trust.img");
-run_program("/bin/dd", "if=/tmp/trust.img", "of=/dev/block/mmcblk1", "seek=24576");
+run_program("/bin/dd", "if=/tmp/trust.img", "of=/dev/block/mmcblk0", "seek=24576");
 
 set_progress(0.4000);
 
 ui_print("   resource image is flashing...");
 package_extract_file("resource.img", "/tmp/resource.img");
-run_program("/bin/dd", "if=/tmp/resource.img", "of=/dev/block/mmcblk1", "seek=32776");
+run_program("/bin/dd", "if=/tmp/resource.img", "of=/dev/block/mmcblk0", "seek=32776");
 
 set_progress(0.5000);
 
 ui_print("   Linux kernel image is flashing...");
 package_extract_file("kernel.img", "/tmp/kernel.img");
-run_program("/bin/dd", "if=/tmp/kernel.img", "of=/dev/block/mmcblk1", "seek=65544");
+run_program("/bin/dd", "if=/tmp/kernel.img", "of=/dev/block/mmcblk0", "seek=65544");
 
 set_progress(0.6000);
 
 ui_print("   boot image is flashing...");
 package_extract_file("boot.img", "/tmp/boot.img");
-run_program("/bin/dd", "if=/tmp/boot.img", "of=/dev/block/mmcblk1", "seek=114696");
+run_program("/bin/dd", "if=/tmp/boot.img", "of=/dev/block/mmcblk0", "seek=114696");
 
 set_progress(0.7000);
 
 ui_print("   'recovery' partition is flashing...");
 package_extract_file("recovery.img", "/tmp/recovery.img");
-run_program("/bin/dd", "if=/tmp/recovery.img", "of=/dev/block/mmcblk1", "seek=180232");
+run_program("/bin/dd", "if=/tmp/recovery.img", "of=/dev/block/mmcblk0", "seek=180232");
 
 set_progress(0.8000);
 
 ui_print("   'system' partition is extracting...");
-mount("ext4", "EMMC", "/dev/block/mmcblk1p2", "/system");
+mount("ext4", "EMMC", "/dev/block/mmcblk0p2", "/system");
 package_extract_dir("system", "/system");
 
 set_progress(0.9000);

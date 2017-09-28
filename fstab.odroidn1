@@ -3,10 +3,10 @@
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
 # specify MF_CHECK, and must come before and filesystems that do specify MF_CHECK
 
-/dev/block/mmcblk1p2 /system            ext4    ro                                              wait
-/dev/block/mmcblk1p4 /data              ext4    noatime,nosuid,nodev wait,check,encryptable=/dev/block/misc
-/dev/block/mmcblk1p3 /cache             ext4    noatime,nosuid,nodev wait,check
-/dev/block/mmcblk1   /misc              raw     offset=32768    defaults
+/dev/block/mmcblk0p2 /system            ext4    ro                                              wait
+/dev/block/mmcblk0p4 /data              ext4    noatime,nosuid,nodev wait,check,encryptable=/dev/block/misc
+/dev/block/mmcblk0p3 /cache             ext4    noatime,nosuid,nodev wait,check
+/dev/block/mmcblk0   /misc              raw     offset=32768    defaults
 
 # When booted by eMMC card
 /devices/platform/fe330000.sdhci/mmc_host*                auto  auto    defaults        voldmanaged=internal:1,noemulatedsd
