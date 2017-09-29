@@ -6,10 +6,13 @@
 /dev/block/mmcblk0p2 /system            ext4    ro                                              wait
 /dev/block/mmcblk0p4 /data              ext4    noatime,nosuid,nodev wait,check,encryptable=/dev/block/misc
 /dev/block/mmcblk0p3 /cache             ext4    noatime,nosuid,nodev wait,check
+/dev/block/mmcblk0   /misc              raw     offset=32768    defaults
 
 # When booted by SD card
-/devices/*.sd/mmc_host/*                auto    vfat    defaults    voldmanaged=internal:1,noemulatedsd
-/devices/*.emmc/mmc_host/emmc*          auto    auto    defaults    voldmanaged=sdcard:auto
+/devices/platform/fe320000.dwmmc/mmc_host/*                auto  auto    defaults        voldmanaged=internal:1,noemulatedsd
+/devices/platform/fe330000.sdhci/mmc_host/*                auto  auto    defaults        voldmanaged=sdcard1:auto
 
-/devices/*dwc2_*/usb?/*/host*/target*/block/sd* auto    auto    defaults    voldmanaged=udisk0:auto
-/devices/*dwc2_*/usb?/*/host*/target*/block/sd* auto    auto    defaults    voldmanaged=udisk1:auto
+# for usb2.0
+/devices/platform/*.usb*            auto auto defaults      voldmanaged=usb:auto
+# for usb3.0
+/devices/platform/usb@*/*.dwc3*     auto auto defaults      voldmanaged=usb:auto

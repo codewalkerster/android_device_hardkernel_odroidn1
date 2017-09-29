@@ -9,8 +9,8 @@
 /dev/block/mmcblk0   /misc              raw     offset=32768    defaults
 
 # When booted by eMMC card
-/devices/platform/fe330000.sdhci/mmc_host*                auto  auto    defaults        voldmanaged=internal:1,noemulatedsd
-/devices/platform/fe320000.dwmmc/mmc_host*                auto  auto    defaults        voldmanaged=sdcard1:auto
+/devices/platform/fe330000.sdhci/mmc_host/*                auto  auto    defaults        voldmanaged=internal:1,noemulatedsd
+/devices/platform/fe320000.dwmmc/mmc_host/*                auto  auto    defaults        voldmanaged=sdcard1:auto
 
 # for usb2.0
 /devices/platform/*.usb*            auto auto defaults      voldmanaged=usb:auto
