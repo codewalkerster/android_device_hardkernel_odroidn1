@@ -15,6 +15,11 @@ run_program("/bin/mk_e2fs", "-F", "-t", "ext4", "/dev/block/mmcblk0p4");
 
 set_progress(0.5000);
 
+ui_print("   delete /cache/update.zip");
+run_program("/bin/rm", "-rf", "/cache/update.zip");
+
+set_progress(0.6000);
+
 ui_print("   formatting /dev/block/mmcblk0p1 for VFAT partition");
 run_program("/bin/mkfs.vfat", "-n", "VFAT", "/dev/block/mmcblk0p1");
 
