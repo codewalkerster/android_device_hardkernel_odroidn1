@@ -11,7 +11,7 @@ write_sparse_image("system.img", "system", "/dev/block/mmcblk0p2");
 set_progress(0.4000);
 
 ui_print("   formatting /dev/block/mmcblk0p4 for ext4 partition");
-run_program("/bin/mk_e2fs", "-F", "-t", "ext4", "/dev/block/mmcblk0p4");
+run_program("/bin/mk_e2fs", "-F", "-t", "ext4", "/dev/block/mmcblk0p4", "-L", "data");
 
 set_progress(0.5000);
 
