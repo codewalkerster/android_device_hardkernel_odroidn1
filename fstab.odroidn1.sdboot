@@ -4,7 +4,7 @@
 # specify MF_CHECK, and must come before and filesystems that do specify MF_CHECK
 
 /dev/block/mmcblk0p2 /system            ext4    ro                                              wait
-/dev/block/mmcblk0p4 /data              ext4    noatime,nosuid,nodev wait,check,encryptable=/dev/block/misc
+/dev/block/mmcblk0p4 /data              ext4    noatime,nosuid,nodev,errors=panic wait,check,encryptable=/dev/block/misc
 /dev/block/mmcblk0p3 /cache             ext4    noatime,nosuid,nodev wait,check
 /dev/block/mmcblk0   /misc              raw     offset=32768    defaults
 
