@@ -18,7 +18,7 @@ $(PRODUCT_OUT)/updatepackage.zip: system recovery
 	cp -a $(IMAGES)/boot.img $(PKGDIR)
 	cp -a $(PRODUCT_OUT)/system $(PKGDIR)
 	find $(PKGDIR)/system -type l | xargs rm -rf
-	cp -a $(PRODUCT_OUT)/recovery.img $(PKGDIR)
+	cp -a $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img $(PKGDIR)
 #	mkdir $(PKGDIR)/system/etc -p
 #	cp -a $(PRODUCT_OUT)/system/etc/boot.ini.template $(PKGDIR)/system/etc/
 	cp -a $(PRODUCT_OUT)/system/bin/updater \

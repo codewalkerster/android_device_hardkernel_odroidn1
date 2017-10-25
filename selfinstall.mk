@@ -16,7 +16,6 @@
 
 SIGNJAR := out/host/linux-x86/framework/signapk.jar
 
-IMAGES := rockdev/Image-odroidn1
 KERNEL := kernel
 UBOOT := u-boot/sd_fuse
 IDBLOADER := $(UBOOT)/idbloader.img
@@ -72,6 +71,12 @@ $(SELFINSTALL_DIR)/cache.img: $(SELFINSTALL_DIR)/cache
 $(SELFINSTALL_CACHE_IMAGE): $(SELFINSTALL_DIR)/cache.img
 	simg2img $(SELFINSTALL_DIR)/cache.img $@
 
+$(PRODUCT_OUT)/ramdisk_mkimg.img: $(PRODUCT_OUT)/ramdisk.img
+	u-boot/tools/mkimage -A arm64 -O linux -T ramdisk -a 0x4000000 -e 0x4000000 -n "ramdisk" -d $(PRODUCT_OUT)/ramdisk.img $(PRODUCT_OUT)/ramdisk_mkimg.img
+
+$(PRODUCT_OUT)/ramdisk-recovery_mkimg.img: $(PRODUCT_OUT)/ramdisk-recovery.img
+	u-boot/tools/mkimage -A arm64 -O linux -T ramdisk -a 0x4000000 -e 0x4000000 -n "ramdisk" -d $(PRODUCT_OUT)/ramdisk-recovery.img $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img
+
 #
 # Android Self-Installation
 #
@@ -80,20 +85,18 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).bin: \
 	$(UBOOT)/uboot.img \
 	$(UBOOT)/trust.img \
 	$(BOOTLOADER_MESSAGE) \
-	$(KERNEL)/resource.img \
-	$(KERNEL)/kernel.img \
-	$(IMAGES)/boot.img \
-	$(PRODUCT_OUT)/recovery.img \
+	$(PRODUCT_OUT)/ramdisk_mkimg.img \
+	$(PRODUCT_OUT)/ramdisk-recovery_mkimg.img \
 	$(SELFINSTALL_CACHE_IMAGE)
 	@echo "Creating installable single image file..."
 	dd if=$(IDBLOADER) of=$@ conv=fsync bs=512 seek=64
 	dd if=$(UBOOT)/uboot.img of=$@ conv=fsync bs=512 seek=16384
 	dd if=$(UBOOT)/trust.img of=$@ conv=fsync bs=512 seek=24576
 	dd if=$(BOOTLOADER_MESSAGE) of=$@ conv=fsync bs=512 seek=32768
-	dd if=$(KERNEL)/resource.img of=$@ conv=fsync bs=512 seek=32776
-	dd if=$(KERNEL)/kernel.img of=$@ conv=fsync bs=512 seek=65544
-	dd if=$(IMAGES)/boot.img of=$@ conv=fsync bs=512 seek=114696
-	dd if=$(PRODUCT_OUT)/recovery.img of=$@ conv=fsync bs=512 seek=180232
+	dd if=$(KERNEL)/arch/arm64/boot/dts/rockchip/rk3399-odroidn1-rev0.dtb of=$@ conv=fsync bs=512 seek=32776
+	dd if=$(KERNEL)/arch/arm64/boot/Image of=$@ conv=fsync bs=512 seek=65544
+	dd if=$(PRODUCT_OUT)/ramdisk_mkimg.img of=$@ conv=fsync bs=512 seek=114696
+	dd if=$(PRODUCT_OUT)/ramdisk-recovery_mkimg.img of=$@ conv=fsync bs=512 seek=180232
 	dd if=$(SELFINSTALL_CACHE_IMAGE) of=$@ bs=512 seek=247808
 	sync
 	@echo "Done."

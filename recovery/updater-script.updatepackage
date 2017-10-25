@@ -42,7 +42,7 @@ run_program("/bin/dd", "if=/tmp/boot.img", "of=/dev/block/mmcblk0", "seek=114696
 set_progress(0.7000);
 
 ui_print("   'recovery' partition is flashing...");
-package_extract_file("recovery.img", "/tmp/recovery.img");
+package_extract_file("ramdisk-recovery_mkimg.img", "/tmp/recovery.img");
 run_program("/bin/dd", "if=/tmp/recovery.img", "of=/dev/block/mmcblk0", "seek=180232");
 
 set_progress(0.8000);
