@@ -35,21 +35,20 @@ run_program("/bin/dd", "if=/tmp/kernel.img", "of=/dev/block/mmcblk0", "seek=6554
 
 set_progress(0.6000);
 
-ui_print("   boot image is flashing...");
-package_extract_file("boot.img", "/tmp/boot.img");
-run_program("/bin/dd", "if=/tmp/boot.img", "of=/dev/block/mmcblk0", "seek=114696");
-
-set_progress(0.7000);
-
 ui_print("   'recovery' partition is flashing...");
 package_extract_file("ramdisk-recovery_mkimg.img", "/tmp/recovery.img");
 run_program("/bin/dd", "if=/tmp/recovery.img", "of=/dev/block/mmcblk0", "seek=180232");
 
-set_progress(0.8000);
+set_progress(0.7000);
 
 ui_print("   'system' partition is extracting...");
 mount("ext4", "EMMC", "/dev/block/mmcblk0p2", "/system");
-package_extract_dir("system", "/system");
+package_extract_dir("rootsystem", "/system");
+
+set_progress(0.8000);
+
+ui_print("   boot.ini.template is copying to /system/etc/");
+package_extract_file("system/etc/boot.ini.template", "/system/etc/boot.ini.template");
 
 set_progress(0.9000);
 

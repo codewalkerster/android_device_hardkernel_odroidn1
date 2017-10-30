@@ -6,7 +6,7 @@ ui_print("\n\nHardkernel's ODROID-N1 Android Update is started...");
 set_progress(0.1000);
 
 ui_print("   'system' partition is flashing...");
-write_sparse_image("system.img", "system", "/dev/block/mmcblk0p2");
+write_sparse_image("rootsystem.img", "system", "/dev/block/mmcblk0p2");
 
 set_progress(0.4000);
 

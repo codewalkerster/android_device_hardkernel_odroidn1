@@ -6,7 +6,7 @@ UBOOT := u-boot/sd_fuse
 KERNEL := kernel
 IMAGES := rockdev/Image-odroidn1
 
-$(PRODUCT_OUT)/updatepackage.zip: system recovery
+$(PRODUCT_OUT)/updatepackage.zip: rootsystem recovery
 	rm -rf $@
 	rm -rf $(PKGDIR)
 	mkdir -p $(PKGDIR)/META-INF/com/google/android
@@ -15,9 +15,8 @@ $(PRODUCT_OUT)/updatepackage.zip: system recovery
 	cp -a $(UBOOT)/trust.img $(PKGDIR)
 	cp -a $(KERNEL)/resource.img $(PKGDIR)
 	cp -a $(KERNEL)/kernel.img $(PKGDIR)
-	cp -a $(IMAGES)/boot.img $(PKGDIR)
-	cp -a $(PRODUCT_OUT)/system $(PKGDIR)
-	find $(PKGDIR)/system -type l | xargs rm -rf
+	cp -a $(PRODUCT_OUT)/rootsystem $(PKGDIR)
+	find $(PKGDIR)/rootsystem -type l | xargs rm -rf
 	cp -a $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img $(PKGDIR)
 #	mkdir $(PKGDIR)/system/etc -p
 #	cp -a $(PRODUCT_OUT)/system/etc/boot.ini.template $(PKGDIR)/system/etc/

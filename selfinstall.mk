@@ -30,11 +30,11 @@ SELFINSTALL_CACHE_IMAGE := $(SELFINSTALL_DIR)/cache.ext4
 #
 UPDATE_PACKAGE_PATH := $(SELFINSTALL_DIR)/otapackages
 
-$(SELFINSTALL_DIR)/update.unsigned.zip: cacheimage recoveryimage
+$(SELFINSTALL_DIR)/update.unsigned.zip: cacheimage rootsystem recoveryimage
 	rm -rf $@
 	rm -rf $(UPDATE_PACKAGE_PATH)
 	mkdir -p $(UPDATE_PACKAGE_PATH)/META-INF/com/google/android
-	cp -af $(PRODUCT_OUT)/system.img $(UPDATE_PACKAGE_PATH)
+	cp -af $(PRODUCT_OUT)/rootsystem.img $(UPDATE_PACKAGE_PATH)
 	cp -af $(INSTALLED_CACHEIMAGE_TARGET) $(UPDATE_PACKAGE_PATH)
 	cp -af $(PRODUCT_OUT)/system/bin/updater \
 		$(UPDATE_PACKAGE_PATH)/META-INF/com/google/android/update-binary
