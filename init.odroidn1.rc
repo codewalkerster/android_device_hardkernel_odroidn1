@@ -134,6 +134,7 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 0
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 0
     setprop persist.sys.first_booting false
+    start makebootini
 
 on property:ro.enable.optee=true
     start tee-supplicant
@@ -232,3 +233,10 @@ on property:init.svc.su_daemon=running
     restorecon_recursive /dev/com.android.settings.daemon
     mkdir /dev/com.android.settings 0755 root root
     restorecon_recursive /dev/com.android.settings
+
+service makebootini /system/bin/makebootini.sh
+    class core
+    user root
+    group root
+    disabled
+    oneshot

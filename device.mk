@@ -202,7 +202,8 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     device/hardkernel/odroidn1/files/odroid-usbgps.xml:root/odroid-usbgps.xml \
-    device/hardkernel/odroidn1/files/boot.ini.template:system/etc/boot.ini.template
+    device/hardkernel/odroidn1/files/boot.ini.template:system/etc/boot.ini.template \
+    device/hardkernel/odroidn1/files/makebootini.sh:system/bin/makebootini.sh
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/rt2870.bin:root/lib/firmware/rt2870.bin \
