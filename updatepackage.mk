@@ -4,7 +4,6 @@ PKGDIR=$(PRODUCT_OUT)/updatepackage
 
 UBOOT := u-boot/sd_fuse
 KERNEL := kernel
-IMAGES := rockdev/Image-odroidn1
 
 $(PRODUCT_OUT)/updatepackage.zip: rootsystem recovery
 	rm -rf $@
@@ -13,13 +12,14 @@ $(PRODUCT_OUT)/updatepackage.zip: rootsystem recovery
 	cp -a $(UBOOT)/idbloader.img $(PKGDIR)
 	cp -a $(UBOOT)/uboot.img $(PKGDIR)
 	cp -a $(UBOOT)/trust.img $(PKGDIR)
-	cp -a $(KERNEL)/resource.img $(PKGDIR)
-	cp -a $(KERNEL)/kernel.img $(PKGDIR)
+	cp -a $(KERNEL)/arch/arm64/boot/dts/rockchip/rk3399-odroidn1-rev0.dtb $(PKGDIR)
+	cp -a $(KERNEL)/arch/arm64/boot/Image $(PKGDIR)
 	cp -a $(PRODUCT_OUT)/rootsystem $(PKGDIR)
 	find $(PKGDIR)/rootsystem -type l | xargs rm -rf
+	cp -a $(PRODUCT_OUT)/ramdisk_mkimg.img $(PKGDIR)
 	cp -a $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img $(PKGDIR)
-#	mkdir $(PKGDIR)/system/etc -p
-#	cp -a $(PRODUCT_OUT)/system/etc/boot.ini.template $(PKGDIR)/system/etc/
+	mkdir $(PKGDIR)/system/etc -p
+	cp -a $(PRODUCT_OUT)/system/etc/boot.ini.template $(PKGDIR)/system/etc/
 	cp -a $(PRODUCT_OUT)/system/bin/updater \
 		$(PKGDIR)/META-INF/com/google/android/update-binary
 	cp -a $(TARGET_DEVICE_DIR)/recovery/updater-script.updatepackage \

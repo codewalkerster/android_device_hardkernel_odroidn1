@@ -23,21 +23,27 @@ run_program("/bin/dd", "if=/tmp/trust.img", "of=/dev/block/mmcblk0", "seek=24576
 
 set_progress(0.4000);
 
-ui_print("   resource image is flashing...");
-package_extract_file("resource.img", "/tmp/resource.img");
-run_program("/bin/dd", "if=/tmp/resource.img", "of=/dev/block/mmcblk0", "seek=32776");
+ui_print("   dtb image is flashing...");
+package_extract_file("", "/tmp/rk3399-odroidn1-rev0.dtb");
+run_program("/bin/dd", "if=/tmp/rk3399-odroidn1-rev0.dtb", "of=/dev/block/mmcblk0", "seek=32776");
 
 set_progress(0.5000);
 
 ui_print("   Linux kernel image is flashing...");
-package_extract_file("kernel.img", "/tmp/kernel.img");
-run_program("/bin/dd", "if=/tmp/kernel.img", "of=/dev/block/mmcblk0", "seek=65544");
+package_extract_file("Image", "/tmp/Image");
+run_program("/bin/dd", "if=/tmp/Image", "of=/dev/block/mmcblk0", "seek=65544");
 
 set_progress(0.6000);
 
+ui_print("   'recovery mkimg' partition is flashing...");
+package_extract_file("ramdisk_mkimg.img", "/tmp/ramdisk_mkimg.img");
+run_program("/bin/dd", "if=/tmp/ramdisk_mkimg", "of=/dev/block/mmcblk0", "seek=114696");
+
+set_progress(0.6500);
+
 ui_print("   'recovery' partition is flashing...");
-package_extract_file("ramdisk-recovery_mkimg.img", "/tmp/recovery.img");
-run_program("/bin/dd", "if=/tmp/recovery.img", "of=/dev/block/mmcblk0", "seek=180232");
+package_extract_file("ramdisk-recovery_mkimg.img", "/tmp/ramdisk-recovery_mkimg.img");
+run_program("/bin/dd", "if=/tmp/ramdisk-recovery_mkimg.img", "of=/dev/block/mmcblk0", "seek=180232");
 
 set_progress(0.7000);
 
