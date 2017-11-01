@@ -35,12 +35,6 @@ run_program("/bin/dd", "if=/tmp/Image", "of=/dev/block/mmcblk0", "seek=65544");
 
 set_progress(0.6000);
 
-ui_print("   'recovery mkimg' partition is flashing...");
-package_extract_file("ramdisk_mkimg.img", "/tmp/ramdisk_mkimg.img");
-run_program("/bin/dd", "if=/tmp/ramdisk_mkimg", "of=/dev/block/mmcblk0", "seek=114696");
-
-set_progress(0.6500);
-
 ui_print("   'recovery' partition is flashing...");
 package_extract_file("ramdisk-recovery_mkimg.img", "/tmp/ramdisk-recovery_mkimg.img");
 run_program("/bin/dd", "if=/tmp/ramdisk-recovery_mkimg.img", "of=/dev/block/mmcblk0", "seek=180232");

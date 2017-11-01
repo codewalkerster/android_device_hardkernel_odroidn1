@@ -79,7 +79,6 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).bin: \
 	$(UBOOT)/uboot.img \
 	$(UBOOT)/trust.img \
 	$(BOOTLOADER_MESSAGE) \
-	$(PRODUCT_OUT)/ramdisk_mkimg.img \
 	$(PRODUCT_OUT)/ramdisk-recovery_mkimg.img \
 	$(KERNEL)/arch/arm64/boot/dts/rockchip/rk3399-odroidn1-rev0.dtb \
 	$(KERNEL)/arch/arm64/boot/Image \
@@ -91,7 +90,6 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).bin: \
 	dd if=$(BOOTLOADER_MESSAGE) of=$@ conv=fsync bs=512 seek=32768
 	dd if=$(KERNEL)/arch/arm64/boot/dts/rockchip/rk3399-odroidn1-rev0.dtb of=$@ conv=fsync bs=512 seek=32776
 	dd if=$(KERNEL)/arch/arm64/boot/Image of=$@ conv=fsync bs=512 seek=65544
-	dd if=$(PRODUCT_OUT)/ramdisk_mkimg.img of=$@ conv=fsync bs=512 seek=114696
 	dd if=$(PRODUCT_OUT)/ramdisk-recovery_mkimg.img of=$@ conv=fsync bs=512 seek=180232
 	dd if=$(SELFINSTALL_CACHE_IMAGE) of=$@ bs=512 seek=247808
 	sync
