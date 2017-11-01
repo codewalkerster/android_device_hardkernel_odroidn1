@@ -71,12 +71,6 @@ $(SELFINSTALL_DIR)/cache.img: $(SELFINSTALL_DIR)/cache
 $(SELFINSTALL_CACHE_IMAGE): $(SELFINSTALL_DIR)/cache.img
 	simg2img $(SELFINSTALL_DIR)/cache.img $@
 
-$(PRODUCT_OUT)/ramdisk_mkimg.img: $(PRODUCT_OUT)/ramdisk.img
-	u-boot/tools/mkimage -A arm64 -O linux -T ramdisk -a 0x4000000 -e 0x4000000 -n "ramdisk" -d $(PRODUCT_OUT)/ramdisk.img $(PRODUCT_OUT)/ramdisk_mkimg.img
-
-$(PRODUCT_OUT)/ramdisk-recovery_mkimg.img: $(PRODUCT_OUT)/ramdisk-recovery.img
-	u-boot/tools/mkimage -A arm64 -O linux -T ramdisk -a 0x4000000 -e 0x4000000 -n "ramdisk" -d $(PRODUCT_OUT)/ramdisk-recovery.img $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img
-
 #
 # Android Self-Installation
 #
@@ -87,6 +81,8 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).bin: \
 	$(BOOTLOADER_MESSAGE) \
 	$(PRODUCT_OUT)/ramdisk_mkimg.img \
 	$(PRODUCT_OUT)/ramdisk-recovery_mkimg.img \
+	$(KERNEL)/arch/arm64/boot/dts/rockchip/rk3399-odroidn1-rev0.dtb \
+	$(KERNEL)/arch/arm64/boot/Image \
 	$(SELFINSTALL_CACHE_IMAGE)
 	@echo "Creating installable single image file..."
 	dd if=$(IDBLOADER) of=$@ conv=fsync bs=512 seek=64

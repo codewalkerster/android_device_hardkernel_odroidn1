@@ -50,7 +50,17 @@ $(UBOOT_IMAGE): $(UBOOT_CONFIG)
 	cp trust.img sd_fuse && \
 	popd
 
-$(INSTALLED_KERNEL_TARGET): $(KERNEL_IMAGE) $(UBOOT_IMAGE) | $(ACP)
+RAMDISK_MKIMG := $(PRODUCT_OUT)/ramdisk_mkimg.img
+
+$(RAMDISK_MKIMG): $(PRODUCT_OUT)/ramdisk.img
+	u-boot/tools/mkimage -A arm64 -O linux -T ramdisk -a 0x4000000 -e 0x4000000 -n "ramdisk" -d $(PRODUCT_OUT)/ramdisk.img $(PRODUCT_OUT)/ramdisk_mkimg.img
+
+RAMDISK_RECOVERY_MKIMG := $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img
+
+$(RAMDISK_RECOVERY_MKIMG): $(PRODUCT_OUT)/ramdisk-recovery.img
+	u-boot/tools/mkimage -A arm64 -O linux -T ramdisk -a 0x4000000 -e 0x4000000 -n "ramdisk" -d $(PRODUCT_OUT)/ramdisk-recovery.img $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img
+
+$(INSTALLED_KERNEL_TARGET): $(KERNEL_IMAGE) $(UBOOT_IMAGE) $(RAMDISK_MKIMG) $(RAMDISK_RECOVERY_MKIMG) | $(ACP)
 	@echo "Kernel installed"
 	@echo "U-boot installed"
 	$(transform-prebuilt-to-target)
