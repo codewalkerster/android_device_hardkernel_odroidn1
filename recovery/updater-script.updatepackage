@@ -24,7 +24,7 @@ run_program("/bin/dd", "if=/tmp/trust.img", "of=/dev/block/mmcblk0", "seek=24576
 set_progress(0.4000);
 
 ui_print("   dtb image is flashing...");
-package_extract_file("", "/tmp/rk3399-odroidn1-rev0.dtb");
+package_extract_file("rk3399-odroidn1-rev0.dtb", "/tmp/rk3399-odroidn1-rev0.dtb");
 run_program("/bin/dd", "if=/tmp/rk3399-odroidn1-rev0.dtb", "of=/dev/block/mmcblk0", "seek=32776");
 
 set_progress(0.5000);
