@@ -94,9 +94,9 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).bin: \
 	dd if=$(UBOOT)/trust.img of=$@ conv=fsync bs=512 seek=24576
 	dd if=$(BOOTLOADER_MESSAGE) of=$@ conv=fsync bs=512 seek=32768
 	dd if=$(KERNEL)/arch/arm64/boot/dts/rockchip/rk3399-odroidn1-rev0.dtb of=$@ conv=fsync bs=512 seek=32776
-	dd if=$(KERNEL)/arch/arm64/boot/Image of=$@ conv=fsync bs=512 seek=65544
-	dd if=$(PRODUCT_OUT)/ramdisk-recovery_mkimg.img of=$@ conv=fsync bs=512 seek=180232
-	dd if=$(SELFINSTALL_CACHE_IMAGE) of=$@ bs=512 seek=247808
+	dd if=$(KERNEL)/arch/arm64/boot/Image of=$@ conv=fsync bs=512 seek=33800
+	dd if=$(PRODUCT_OUT)/ramdisk-recovery_mkimg.img of=$@ conv=fsync bs=512 seek=70664
+	dd if=$(SELFINSTALL_CACHE_IMAGE) of=$@ bs=512 seek=88064
 	sync
 	@echo "Done."
 

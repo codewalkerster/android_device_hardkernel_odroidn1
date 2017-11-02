@@ -31,13 +31,13 @@ set_progress(0.5000);
 
 ui_print("   Linux kernel image is flashing...");
 package_extract_file("Image", "/tmp/Image");
-run_program("/bin/dd", "if=/tmp/Image", "of=/dev/block/mmcblk0", "seek=65544");
+run_program("/bin/dd", "if=/tmp/Image", "of=/dev/block/mmcblk0", "seek=33800");
 
 set_progress(0.6000);
 
 ui_print("   'recovery' partition is flashing...");
 package_extract_file("ramdisk-recovery_mkimg.img", "/tmp/ramdisk-recovery_mkimg.img");
-run_program("/bin/dd", "if=/tmp/ramdisk-recovery_mkimg.img", "of=/dev/block/mmcblk0", "seek=180232");
+run_program("/bin/dd", "if=/tmp/ramdisk-recovery_mkimg.img", "of=/dev/block/mmcblk0", "seek=70664");
 
 set_progress(0.7000);
 
