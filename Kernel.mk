@@ -40,12 +40,7 @@ $(UBOOT_IMAGE): $(UBOOT_CONFIG)
 	$(MAKE) -C $(UBOOT_ROOTDIR) ARCHV=$(UBOOT_ARCHV) \
 		CROSS_COMPILE=$(UBOOT_CROSS_COMPILE)
 
-RAMDISK_RECOVERY_MKIMG := $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img
-
-$(RAMDISK_RECOVERY_MKIMG): $(PRODUCT_OUT)/ramdisk-recovery.img
-	u-boot/tools/mkimage -A arm64 -O linux -T ramdisk -a 0x4000000 -e 0x4000000 -n "ramdisk" -d $(PRODUCT_OUT)/ramdisk-recovery.img $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img
-
-$(INSTALLED_KERNEL_TARGET): $(KERNEL_IMAGE) $(UBOOT_IMAGE) $(RAMDISK_RECOVERY_MKIMG) | $(ACP)
+$(INSTALLED_KERNEL_TARGET): $(KERNEL_IMAGE) $(UBOOT_IMAGE) | $(ACP)
 	@echo "Kernel installed"
 	@echo "U-boot installed"
 	$(transform-prebuilt-to-target)

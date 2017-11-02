@@ -25,6 +25,11 @@ SELFINSTALL_SIGNED_UPDATEPACKAGE := $(SELFINSTALL_DIR)/cache/update.zip
 BOOTLOADER_MESSAGE := $(SELFINSTALL_DIR)/BOOTLOADER_MESSAGE
 SELFINSTALL_CACHE_IMAGE := $(SELFINSTALL_DIR)/cache.ext4
 
+RAMDISK_RECOVERY_MKIMG := $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img
+
+$(RAMDISK_RECOVERY_MKIMG): recoveryimage $(PRODUCT_OUT)/ramdisk-recovery.img
+	u-boot/tools/mkimage -A arm64 -O linux -T ramdisk -a 0x4000000 -e 0x4000000 -n "ramdisk" -d $(PRODUCT_OUT)/ramdisk-recovery.img $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img
+
 #
 # Update image : update.zip
 #
@@ -79,7 +84,7 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).bin: \
 	$(UBOOT)/uboot.img \
 	$(UBOOT)/trust.img \
 	$(BOOTLOADER_MESSAGE) \
-	$(PRODUCT_OUT)/ramdisk-recovery_mkimg.img \
+	$(RAMDISK_RECOVERY_MKIMG) \
 	$(KERNEL)/arch/arm64/boot/dts/rockchip/rk3399-odroidn1-rev0.dtb \
 	$(KERNEL)/arch/arm64/boot/Image \
 	$(SELFINSTALL_CACHE_IMAGE)
@@ -96,4 +101,4 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).bin: \
 	@echo "Done."
 
 .PHONY: selfinstall
-selfinstall: $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).bin
+selfinstall: $(recovery_ramdisk) $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).bin
