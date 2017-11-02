@@ -14,7 +14,7 @@ $(PRODUCT_OUT)/updatepackage.zip: rootsystem recovery
 	cp -a $(UBOOT)/trust.img $(PKGDIR)
 	cp -a $(KERNEL)/arch/arm64/boot/dts/rockchip/rk3399-odroidn1-rev0.dtb $(PKGDIR)
 	cp -a $(KERNEL)/arch/arm64/boot/Image $(PKGDIR)
-	cp -a $(PRODUCT_OUT)/rootsystem $(PKGDIR)
+	cp -ad $(PRODUCT_OUT)/rootsystem $(PKGDIR)
 	find $(PKGDIR)/rootsystem -type l | xargs rm -rf
 	cp -a $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img $(PKGDIR)
 	mkdir $(PKGDIR)/system/etc -p
@@ -24,7 +24,7 @@ $(PRODUCT_OUT)/updatepackage.zip: rootsystem recovery
 	cp -a $(TARGET_DEVICE_DIR)/recovery/updater-script.updatepackage \
 		$(PKGDIR)/META-INF/com/google/android/updater-script
 	( pushd $(PKGDIR); \
-		zip -r $(CURDIR)/$@ * ; \
+		zip --symlinks -r $(CURDIR)/$@ * ; \
 	)
 
 $(PRODUCT_OUT)/updatepackage-$(TARGET_DEVICE)-signed.zip: \
