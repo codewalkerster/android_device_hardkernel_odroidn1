@@ -16,3 +16,5 @@
 /devices/platform/*.usb*            auto auto defaults      voldmanaged=usb:auto
 # for usb3.0
 /devices/platform/usb@*/*.dwc3*     auto auto defaults      voldmanaged=usb:auto
+# for PCIe
+/devices/platform/*.pcie*             auto auto defaults      voldmanaged=usb:auto
