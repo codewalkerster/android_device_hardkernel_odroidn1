@@ -52,7 +52,7 @@ BOARD_HAVE_BLUETOOTH_LINUX := true
 # Disable bluetooth because of continuous driver crashes
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_bluetooth=false
 
-PRODUCT_AAPT_CONFIG := normal large mdpi tvdpi hdpi xhdpi
+PRODUCT_AAPT_CONFIG := normal large xlarge ldpi mdpi tvdpi hdpi xhdpi xxhdpi xxxhdpi
 
 PRODUCT_SYSTEM_VERITY := true
 
