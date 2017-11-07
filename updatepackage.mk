@@ -19,6 +19,7 @@ $(PRODUCT_OUT)/updatepackage.zip: rootsystem recovery
 	cp -a $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img $(PKGDIR)
 	mkdir $(PKGDIR)/system/etc -p
 	cp -a $(PRODUCT_OUT)/system/etc/boot.ini.template $(PKGDIR)/system/etc/
+	$(shell device/hardkernel/odroidn1/makeupdatezip.sh)
 	cp -a $(PRODUCT_OUT)/system/bin/updater \
 		$(PKGDIR)/META-INF/com/google/android/update-binary
 	cp -a $(TARGET_DEVICE_DIR)/recovery/updater-script.updatepackage \
