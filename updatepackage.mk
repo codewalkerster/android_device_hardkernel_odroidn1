@@ -16,7 +16,7 @@ $(PRODUCT_OUT)/updatepackage.zip: rootsystem recovery
 	cp -a $(KERNEL)/arch/arm64/boot/Image $(PKGDIR)
 	cp -ad $(PRODUCT_OUT)/rootsystem $(PKGDIR)
 	find $(PKGDIR)/rootsystem -type l | xargs rm -rf
-	cp -a $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img $(PKGDIR)
+	cp -a $(RAMDISK_RECOVERY_MKIMG) $(PKGDIR)
 	mkdir $(PKGDIR)/system/etc -p
 	cp -a $(PRODUCT_OUT)/system/etc/boot.ini.template $(PKGDIR)/system/etc/
 	$(shell device/hardkernel/odroidn1/makeupdatezip.sh)

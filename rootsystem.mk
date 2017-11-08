@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+RAMDISK_RECOVERY_MKIMG := $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img
 
 .PHONY: $(PRODUCT_OUT)/rootsystem/fstab.$(TARGET_PRODUCT)
 $(PRODUCT_OUT)/rootsystem/fstab.$(TARGET_PRODUCT): $(PRODUCT_OUT)/rootsystem
@@ -35,6 +36,7 @@ $(PRODUCT_OUT)/rootsystem: droidcore
 	ln -sf /bin/healthd $(PRODUCT_OUT)/rootsystem/sbin/healthd
 	ln -sf /bin/adbd $(PRODUCT_OUT)/rootsystem/sbin/adbd
 	sed -i "s,^ro.secure=*,ro.secure=0,g" $(PRODUCT_OUT)/rootsystem/default.prop
+	u-boot/tools/mkimage -A arm64 -O linux -T ramdisk -a 0x4000000 -e 0x4000000 -n "ramdisk" -d $(PRODUCT_OUT)/ramdisk-recovery.img $(PRODUCT_OUT)/ramdisk-recovery_mkimg.img
 
 $(PRODUCT_OUT)/rootsystem.img: $(PRODUCT_OUT)/rootsystem \
 	$(PRODUCT_OUT)/rootsystem/fstab.$(TARGET_PRODUCT)

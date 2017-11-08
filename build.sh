@@ -12,6 +12,4 @@ lunch odroidn1-eng
 CPU_JOB_NUM=$(grep processor /proc/cpuinfo | awk '{field=$NF};END{print field+1}')
 ROOT_DIR=$(pwd)
 
-make -j$CPU_JOB_NUM
-
 make -j$CPU_JOB_NUM updatepackage selfinstall
