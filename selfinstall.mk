@@ -79,15 +79,14 @@ $(PRODUCT_OUT)/selfinstall-$(TARGET_DEVICE).bin: \
 	$(UBOOT)/uboot.img \
 	$(UBOOT)/trust.img \
 	$(BOOTLOADER_MESSAGE) \
-	$(KERNEL)/arch/arm64/boot/dts/rockchip/rk3399-odroidn1-rev0.dtb \
-	$(KERNEL)/arch/arm64/boot/Image \
+	$(KERNEL_IMAGE) \
 	$(SELFINSTALL_CACHE_IMAGE)
 	@echo "Creating installable single image file..."
 	dd if=$(IDBLOADER) of=$@ conv=fsync bs=512 seek=64
 	dd if=$(UBOOT)/uboot.img of=$@ conv=fsync bs=512 seek=16384
 	dd if=$(UBOOT)/trust.img of=$@ conv=fsync bs=512 seek=24576
 	dd if=$(BOOTLOADER_MESSAGE) of=$@ conv=fsync bs=512 seek=32768
-	dd if=$(KERNEL)/arch/arm64/boot/dts/rockchip/rk3399-odroidn1-rev0.dtb of=$@ conv=fsync bs=512 seek=32776
+	dd if=$(DTB_IMAGE) of=$@ conv=fsync bs=512 seek=32776
 	dd if=$(KERNEL)/arch/arm64/boot/Image of=$@ conv=fsync bs=512 seek=33800
 	dd if=$(RAMDISK_RECOVERY_MKIMG) of=$@ conv=fsync bs=512 seek=70664
 	dd if=$(SELFINSTALL_CACHE_IMAGE) of=$@ bs=512 seek=88064

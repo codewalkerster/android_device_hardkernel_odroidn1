@@ -9,6 +9,7 @@ PREFIX_CROSS_COMPILE := aarch64-linux-android-
 KERNEL_ROOTDIR := kernel
 KERNEL_CONFIG := $(KERNEL_ROOTDIR)/.config
 KERNEL_IMAGE := $(KERNEL_ROOTDIR)/arch/$(KERNEL_ARCH)/boot/Image
+DTB_IMAGE := $(KERNEL_ROOTDIR)/arch/$(KERNEL_ARCH)/boot/dts/rockchip/rk3399-odroidn1-rev0.dtb
 KERNEL_MODULES_INSTALL := system
 KERNEL_MODULES_OUT := $(TARGET_OUT)/lib/modules
 
