@@ -15,7 +15,13 @@ setenv androidopt "androidboot.baseband=N/A androidboot.selinux=disabled android
 
 setenv mtdparts_dos "rk29xxnand:0x00040000@0x00513800(fat),0x00300000@0x00213800(system),0x00200000@0x00013800(cache),-@0x00553800(userdata)"
 
-setenv bootargs "earlycon=uart8250,mmio32,0xff1a0000 swiotlb=1 ${androidopt} ${rootopt} mtdparts=${mtdparts_dos} storagemedia=${storagemedia} disable_vu7=${disable_vu7} touch_invert_x=${touch_invert_x} touch_invert_y=${touch_invert_y} led_onoff=${led_onoff} SecureBootCheckOk=0"
+#--- HDMI / DVI Mode Selection ---
+# - HDMI Mode
+setenv vout "hdmi"
+# - DVI Mode (disables sound over HDMI as per DVI compat)
+# setenv vout "dvi"
+
+setenv bootargs "earlycon=uart8250,mmio32,0xff1a0000 swiotlb=1 ${androidopt} ${rootopt} mtdparts=${mtdparts_dos} storagemedia=${storagemedia} vout=${vout} disable_vu7=${disable_vu7} touch_invert_x=${touch_invert_x} touch_invert_y=${touch_invert_y} led_onoff=${led_onoff} SecureBootCheckOk=0"
 
 # Booting
 mmc dev ${bootdev}
