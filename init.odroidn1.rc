@@ -129,6 +129,9 @@ on boot
     mkdir /mnt/iso 0660 system system
     chmod 0666 /dev/opteearmtz00
 
+    # Power Off trigger node
+    chmod 0222 /sys/class/odroid/poweroff_trigger
+
 # cpu min freq must change to 126M when boot completed
 on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 0
