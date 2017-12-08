@@ -178,7 +178,7 @@ PRODUCT_PACKAGE_OVERLAYS += $(TARGET_DEVICE_DIR)/overlay
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), tablet)
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rk.hdmi_enable=false
+    ro.rk.hdmi_enable=true
 endif
 
 ifeq ($(strip $(PRODUCT_SYSTEM_VERITY)), true)
