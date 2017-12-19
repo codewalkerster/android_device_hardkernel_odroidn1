@@ -28,7 +28,6 @@ $(PRODUCT_OUT)/rootsystem: droidcore
 	rm -rf $@/etc
 	rm -rf $@/vendor
 	cp -arp $(PRODUCT_OUT)/system/* $@
-	cp -d $(PRODUCT_OUT)/utilities/busybox/bin/* $@/xbin/
 	mv $(PRODUCT_OUT)/rootsystem/init $(PRODUCT_OUT)/rootsystem/bin/
 	mv $(PRODUCT_OUT)/rootsystem/sbin/healthd $(PRODUCT_OUT)/rootsystem/bin/
 	mv $(PRODUCT_OUT)/rootsystem/sbin/adbd $(PRODUCT_OUT)/rootsystem/bin/
