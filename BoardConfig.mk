@@ -86,3 +86,6 @@ BOARD_SUPPORT_EXTERNAL_GPS := true
 
 SUPERUSER_EMBEDDED := true
 SUPERUSER_PACKAGE_PREFIX := com.android.settings.cyanogenmod.superuser
+
+#for 3G/4G modem dongle support
+BOARD_HAVE_DONGLE := false
