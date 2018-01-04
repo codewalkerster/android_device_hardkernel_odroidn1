@@ -243,3 +243,10 @@ service makebootini /system/bin/makebootini.sh
     group root
     disabled
     oneshot
+
+service backlight /system/bin/backlight.sh
+    class core
+    user root
+    group root
+    disabled
+    oneshot
