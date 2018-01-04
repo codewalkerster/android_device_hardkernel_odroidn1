@@ -311,3 +311,4 @@
 /dev/ttyACM*   0666    gps             gps
 /dev/ttyUSB*   0666    gps             gps
 /dev/gpiomem   0666    system          system
+/dev/odroid-encoder	0666	system	system
