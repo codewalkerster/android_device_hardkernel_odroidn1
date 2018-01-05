@@ -116,3 +116,9 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     Utility
+
+# backlight
+PRODUCT_PACKAGES += \
+    lights.$(PRODUCT_DEVICE)
+
+
