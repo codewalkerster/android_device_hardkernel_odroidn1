@@ -38,6 +38,7 @@ ro.factory.tool=0
 #set default lcd density for rk3399 tablet
 ro.sf.lcd_density=160
 ro.adb.secure=0
+persist.sys.hdmi.cec_enable=true
 
 service.adb.tcp.port=5555
 
