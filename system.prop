@@ -42,8 +42,5 @@ persist.sys.hdmi.cec_enable=true
 
 service.adb.tcp.port=5555
 
-# default main framebuffer resolution
-persist.sys.framebuffer.main=1920x1080
-
 # default primary display
 sys.hwc.device.primary=HDMI-A
